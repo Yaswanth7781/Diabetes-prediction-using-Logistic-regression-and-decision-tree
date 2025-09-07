@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Diabetic Predictor</title>
+<link rel="stylesheet" href="{% static 'predictor_app/css/main.css' %}"> <!-- if using staticfiles -->
+</head>
+<body>
+<div class="container">
+<h1>Diabetic Predictor</h1>
+
+<form method="post" action="{% url 'predict' %}" class="form">
+    {% csrf_token %}
+    <label>Glucose<input type="number" step="any" name="glucose" required></label>
+    <label>BMI<input type="number" step="any" name="bmi" required></label>
+    <label>BP<input type="number" step="any" name="bp" required></label>
+    <label>Age<input type="number" step="any" name="age" required></label>
+    <label>Family History (Yes or No)<input type="text" name="familyhistory" required></label>
+    <button type="submit">Predict</button>
+</form>
+
+
+{% if prediction is not None %}
+<div class="result">
+<h2>Prediction: {% if prediction == 1 %}Diabetic{% else %}Not Diabetic{% endif %}</h2>
+{% if prob %}
+<p>Probabilities: {{ prob }}</p>
+{% endif %}
+</div>
+{% endif %}
+
+
+{% if error %}
+<div class="error">Error: {{ error }}</div>
+{% endif %}
+</div>
+</body>
+</html>
