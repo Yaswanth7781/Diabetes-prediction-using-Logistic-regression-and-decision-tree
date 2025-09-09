@@ -1,0 +1,10 @@
+Django>=4.2,<5.0
+gunicorn
+whitenoise  # for serving static files
+psycopg2-binary  # if you use PostgreSQL (not needed for SQLite)
+mysqlclient  # if you use MySQL
+djangorestframework  # if you used DRF
+pillow  # if you used ImageField
+requests  # if you made API calls
+numpy
+pandas
